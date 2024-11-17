@@ -1,4 +1,4 @@
-package com.nexcodelab.agendaclinicaser.application.agenda.estagiario.dto.response;
+package com.nexcodelab.agendaclinicaser.application.agenda.geral.dto.response;
 
 import com.nexcodelab.agendaclinicaser.application.agenda.ocupacaohorario.model.enums.ComparecimentoEnvolvido;
 import com.nexcodelab.agendaclinicaser.application.atendimento.model.Atendimento;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Value
 @Builder
-public class AtendimentoAgendaEstagiarioResponse {
+public class AtendimentoAgendaResponse {
     Long id;
     LocalDateTime dataHora;
 
@@ -25,16 +25,19 @@ public class AtendimentoAgendaEstagiarioResponse {
     String siglaEstagiario;
     ComparecimentoEnvolvido comparecimentoEnvolvidoEstagiario;
 
+    String nomeSupervisor;
+    String siglaSupervisor;
+
     String idSala;
     String nomeSala;
 
 
-    public static List<AtendimentoAgendaEstagiarioResponse> of(List<Atendimento> atendimentos) {
-        return atendimentos.stream().map(AtendimentoAgendaEstagiarioResponse::of).collect(Collectors.toList());
+    public static List<AtendimentoAgendaResponse> of(List<Atendimento> atendimentos) {
+        return atendimentos.stream().map(AtendimentoAgendaResponse::of).collect(Collectors.toList());
     }
 
-    public static AtendimentoAgendaEstagiarioResponse of(Atendimento atendimento) {
-        return AtendimentoAgendaEstagiarioResponse.builder()
+    public static AtendimentoAgendaResponse of(Atendimento atendimento) {
+        return AtendimentoAgendaResponse.builder()
                 .id(atendimento.getId())
                 .dataHora(atendimento.getDataHora())
                 .idPaciente(atendimento.getPacienteEmServico().getPaciente().getId())
@@ -45,6 +48,8 @@ public class AtendimentoAgendaEstagiarioResponse {
                 .nomeEstagiario(atendimento.getEstagiarioEmServico().getEstagiario().getNomeCompleto())
                 .siglaEstagiario(atendimento.getEstagiarioEmServico().getEstagiario().getSigla())
                 .comparecimentoEnvolvidoEstagiario(atendimento.getEstagiarioEmServico().getComparecimentoEnvolvido())
+                .nomeSupervisor(atendimento.getEstagiarioEmServico().getEstagiario().getNomeCompletoSupervisor())
+                .siglaSupervisor(atendimento.getEstagiarioEmServico().getEstagiario().getSiglaSupervisor())
                 .idSala(atendimento.getLocalDeTerapia().getSala().getId())
                 .nomeSala(atendimento.getLocalDeTerapia().getSala().getNome())
                 .build();

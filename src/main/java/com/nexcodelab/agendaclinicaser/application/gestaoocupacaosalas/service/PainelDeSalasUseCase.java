@@ -3,7 +3,7 @@ package com.nexcodelab.agendaclinicaser.application.gestaoocupacaosalas.service;
 import com.nexcodelab.agendaclinicaser.application.atendimento.model.Atendimento;
 import com.nexcodelab.agendaclinicaser.application.atendimento.repository.AtendimentoRepository;
 import com.nexcodelab.agendaclinicaser.application.disponibilidade.repository.DisponibilidadeRepository;
-import com.nexcodelab.agendaclinicaser.application.disponibilidade.vo.DisponibilidadeParaPainelDeSalasVO;
+import com.nexcodelab.agendaclinicaser.application.disponibilidade.vo.DisponibilidadePainelDeSalaVO;
 import com.nexcodelab.agendaclinicaser.application.gestaoocupacaosalas.dto.response.PainelDeSalasResponse;
 import com.nexcodelab.agendaclinicaser.application.sala.repository.SalaRepository;
 import com.nexcodelab.agendaclinicaser.application.sala.vo.ISalaResumidaVO;
@@ -43,13 +43,13 @@ public class PainelDeSalasUseCase {
                 .stream().collect(Collectors.groupingBy(a -> a.getDataHora().toLocalDate().getDayOfWeek()));
 
 
-        Map<DayOfWeek, List<DisponibilidadeParaPainelDeSalasVO>> disponibilidadesPorDiaDaSemana = disponibilidadeRepository
+        Map<DayOfWeek, List<DisponibilidadePainelDeSalaVO>> disponibilidadesPorDiaDaSemana = disponibilidadeRepository
                 .findDisponibilidadeParaPainelDeSalas()
                 .stream().collect(Collectors.groupingBy(dis -> dis.getDiaDaSemana()));
 
         disponibilidadesPorDiaDaSemana.entrySet().stream().forEach(entry -> {
             DayOfWeek diaDaSemana = entry.getKey();
-            List<DisponibilidadeParaPainelDeSalasVO> disponibilidades = entry.getValue();
+            List<DisponibilidadePainelDeSalaVO> disponibilidades = entry.getValue();
 
             PainelDeSalasResponse responseDiaDaSemana = response.stream().filter(res -> res.getDiaDaSemana().equals(diaDaSemana)).findFirst().get();
 

@@ -7,9 +7,10 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 @Value
-public class DisponibilidadeParaPainelDeSalasVO {
+public class DisponibilidadePainelDeSalaVO {
     String idPersona;
     String nomePersona;
+    String siglaPersona;
     DayOfWeek diaDaSemana;
     LocalTime horario;
     Sala sala;

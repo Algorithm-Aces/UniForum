@@ -1,4 +1,4 @@
-package com.nexcodelab.agendaclinicaser.application.agenda.estagiario.service;
+package com.nexcodelab.agendaclinicaser.application.agenda.geral.service;
 
 import com.nexcodelab.agendaclinicaser.application.agenda.geral.dto.response.AtendimentoAgendaResponse;
 import com.nexcodelab.agendaclinicaser.application.atendimento.model.Atendimento;
@@ -13,18 +13,18 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AgendaEstagiarioUseCase {
+public class AgendaUseCase {
 
     private final AtendimentoRepository atendimentoRepository;
 
-    public List<AtendimentoAgendaResponse> execute(String idEstagiario, String dataReferencia){
+    public List<AtendimentoAgendaResponse> execute(String dataReferencia){
 
         LocalDateTime dataInicio = DateUtils.toLocalDate(dataReferencia).withDayOfMonth(1)
                 .atStartOfDay();
         LocalDateTime dataFim = DateUtils.toLocalDate(dataReferencia).withDayOfMonth(dataInicio.toLocalDate().lengthOfMonth())
                 .atTime(LocalTime.MAX);
 
-        List<Atendimento> atendimentos = atendimentoRepository.findAtendimentosNoPeriodoPorEstagiario(dataInicio, dataFim, idEstagiario);
+        List<Atendimento> atendimentos = atendimentoRepository.findAtendimentosNoPeriodo(dataInicio, dataFim);
 
         return AtendimentoAgendaResponse.of(atendimentos);
     }

@@ -31,4 +31,8 @@ public class Estagiario extends Persona {
     public String getNomeCompletoSupervisor(){
         return this.supervisor.getNome() + " "  + this.supervisor.getSobrenome();
     }
+
+    public String getSiglaSupervisor(){
+        return this.supervisor.getSigla();
+    }
 }

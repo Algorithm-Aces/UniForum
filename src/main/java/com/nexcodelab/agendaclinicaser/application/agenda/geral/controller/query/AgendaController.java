@@ -1,6 +1,5 @@
-package com.nexcodelab.agendaclinicaser.application.agenda.estagiario.controller.query;
+package com.nexcodelab.agendaclinicaser.application.agenda.geral.controller.query;
 
-import com.nexcodelab.agendaclinicaser.application.agenda.estagiario.service.AgendaEstagiarioUseCase;
 import com.nexcodelab.agendaclinicaser.application.agenda.geral.dto.response.AtendimentoAgendaResponse;
 import com.nexcodelab.agendaclinicaser.application.agenda.geral.service.AgendaUseCase;
 import com.nexcodelab.agendaclinicaser.core.security.annotation.RolesAllowed;
@@ -18,16 +17,16 @@ import java.util.List;
 @Tag(name = "Agenda")
 @RestController
 @RequiredArgsConstructor
-public class AgendaEstagiarioController {
+public class AgendaController {
 
-    private final AgendaEstagiarioUseCase service;
+    private final AgendaUseCase service;
 
     @RolesAllowed(accessLevel = AccessLevel.CLINICA)
-    @GetMapping("/agenda-estagiario/{idEstagiario}/{dataReferencia}")
-    public ResponseEntity<List<AtendimentoAgendaResponse>> execute(@PathVariable String idEstagiario,@PathVariable String dataReferencia){
+    @GetMapping("/agenda/{dataReferencia}")
+    public ResponseEntity<List<AtendimentoAgendaResponse>> execute(@PathVariable String dataReferencia){
 
 
-        List<AtendimentoAgendaResponse> response = service.execute(idEstagiario, dataReferencia);
+        List<AtendimentoAgendaResponse> response = service.execute(dataReferencia);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

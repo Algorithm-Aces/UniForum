@@ -1,8 +1,7 @@
-package com.nexcodelab.agendaclinicaser.application.agenda.estagiario.controller.query;
+package com.nexcodelab.agendaclinicaser.application.agenda.paciente.controller.query;
 
-import com.nexcodelab.agendaclinicaser.application.agenda.estagiario.service.AgendaEstagiarioUseCase;
 import com.nexcodelab.agendaclinicaser.application.agenda.geral.dto.response.AtendimentoAgendaResponse;
-import com.nexcodelab.agendaclinicaser.application.agenda.geral.service.AgendaUseCase;
+import com.nexcodelab.agendaclinicaser.application.agenda.paciente.service.AgendaPacienteUseCase;
 import com.nexcodelab.agendaclinicaser.core.security.annotation.RolesAllowed;
 import com.nexcodelab.agendaclinicaser.core.security.enums.AccessLevel;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -18,16 +17,15 @@ import java.util.List;
 @Tag(name = "Agenda")
 @RestController
 @RequiredArgsConstructor
-public class AgendaEstagiarioController {
+public class AgendaPacienteController {
 
-    private final AgendaEstagiarioUseCase service;
+    private final AgendaPacienteUseCase service;
 
     @RolesAllowed(accessLevel = AccessLevel.CLINICA)
-    @GetMapping("/agenda-estagiario/{idEstagiario}/{dataReferencia}")
-    public ResponseEntity<List<AtendimentoAgendaResponse>> execute(@PathVariable String idEstagiario,@PathVariable String dataReferencia){
+    @GetMapping("/agenda-paciente/{idPaciente}/{dataReferencia}")
+    public ResponseEntity<List<AtendimentoAgendaResponse>> execute(@PathVariable String idPaciente,@PathVariable String dataReferencia){
 
-
-        List<AtendimentoAgendaResponse> response = service.execute(idEstagiario, dataReferencia);
+        List<AtendimentoAgendaResponse> response = service.execute(idPaciente, dataReferencia);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

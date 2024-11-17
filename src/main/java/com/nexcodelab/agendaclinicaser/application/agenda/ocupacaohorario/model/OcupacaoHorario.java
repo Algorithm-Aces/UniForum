@@ -25,6 +25,8 @@ public class OcupacaoHorario extends EntityBase {
     private LocalDateTime dataHoraInicio;
     private LocalDateTime dataHoraFim;
 
+    private String idAgendavel;
+
     // ACONTECENDO_SERVICO
     @ManyToOne private LocalDeTerapia localDeTerapia;
 
